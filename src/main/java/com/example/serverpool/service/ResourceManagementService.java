@@ -29,7 +29,7 @@ public class ResourceManagementService {
         Server foundedServer = null;
 
         for(final Server server: servers) {
-            if (server.getMemory() >= size && (foundedServer != null && server.getMemory() <= foundedServer.getMemory()) && server.isCloud()) {
+            if (server.getMemory() >= size && (foundedServer == null || server.getMemory() <= foundedServer.getMemory()) && server.isCloud()) {
                 foundedServer = server;
             }
         }
