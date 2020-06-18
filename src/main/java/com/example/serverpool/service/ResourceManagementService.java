@@ -29,7 +29,7 @@ public class ResourceManagementService {
         Server foundedServer = null;
 
         for(final Server server: servers) {
-            if (server.getMemory() >= size && (foundedServer != null && server.getMemory() <= foundedServer.getMemory()) && server.isCloud()) {
+            if (server.getMemory() >= size && (foundedServer == null || server.getMemory() <= foundedServer.getMemory()) && server.isCloud()) {
                 foundedServer = server;
             }
         }
@@ -64,7 +64,6 @@ public class ResourceManagementService {
         }
     }
 
-    @Async
     public CompletableFuture<Server> createServer(Long size) throws Exception {
         Server server;
         try {
@@ -74,6 +73,7 @@ public class ResourceManagementService {
             // create cloud server
             server = serverRepository.save(new Server(MAX_CLOUD_SIZE - size, true, false));
             spinNewServer();
+            server = serverRepository.findById(server.getId()).get();
             server.setActive(true);
             activateChildServers(server);
         }
