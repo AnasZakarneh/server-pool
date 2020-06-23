@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Set;
 import org.slf4j.Logger;
 
 @Service
@@ -63,7 +62,6 @@ public class ResourceManagementService {
 
         try {
             server = findMatchedServer(size);
-            LOGGER.info(server.getMemory()+", "+ size);
             server.setMemory(server.getMemory() - size);
         } catch (Exception ex) {
             // create cloud server
