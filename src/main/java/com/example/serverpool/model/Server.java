@@ -1,5 +1,7 @@
 package com.example.serverpool.model;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "servers")
+@DynamicUpdate
 public class Server {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
